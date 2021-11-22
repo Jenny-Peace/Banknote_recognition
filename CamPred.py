@@ -46,12 +46,12 @@ if choice == 'Upload Your Photo':
         #st.write(a[0])
         result = class_names[int(a)]
         st.write('The denomination is:',result)
-        st.write('Probability:')
-        st.write(prediction)
+        # st.write('Probability:')
+        # st.write(prediction)
 
         #Check the img_array here
-        st.write('Image array:')
-        st.write(img_array)
+        # st.write('Image array:')
+        # st.write(img_array)
 
 if choice == 'Capture From Webcam':
     st.title('Capture From Webcam')
@@ -94,12 +94,12 @@ if choice == 'Capture From Webcam':
         #st.write(a[0])
         result = class_names[int(a)]
         st.write('The denomination is:',result)
-        st.write('Probability:')
-        st.write(prediction)
+        # st.write('Probability:')
+        # st.write(prediction)
 
         #Check the img_array here
-        st.write('Image array:')
-        st.write(img_array)
+        # st.write('Image array:')
+        # st.write(img_array)
 
         # Preprocess your prediction , How are we going to get the label name out from the prediction
         # Now it's your turn to solve the rest of the code
