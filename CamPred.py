@@ -8,25 +8,36 @@ from tensorflow import keras
 from keras.models import load_model
 #from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-menu = ['Upload Your Photo','Capture From Webcam']
+menu = ['Home','Upload Your Photo','Capture From Webcam','Ask Me ~~~']
 
 choice = st.sidebar.selectbox('Check your money with options below:', menu)
 
 
 #Load your model and check create the class_names list
-Model_Path = 'my_model_checkpoint_DenseNet.h5'
+Model_Path = 'my_model_checkpoint_DenseNet_Nov22.h5'
 
-#class_names = {0 : '1000', 1 : '10000', 2 : '100000', 3 : '2000', 4 : '20000', 5 : '200000', 6 : '5000', 7 : '50000', 8 : '500000'}
 class_names = ['1,000', '10,000', '100,000',  '2,000',  '20,000',  '200,000',  '5,000', '50,000',  '500,000']
 model = tf.keras.models.load_model(Model_Path)
 model.compile(optimizer=tf.keras.optimizers.Adam(),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
+st.header("Let My First Web App Help You!")
+if choice=='Home':
+    st.title("Wana scan your money??? ")
+
+    st.write("Enjoy some music first")
+    st.write("")
+    st.video('https://www.youtube.com/watch?v=ETxmCCsMoD0')
+
+    st.write("Money, money, money")
+    st.write("Must be funny!!!")
+    st.balloons()
+    
 
 if choice == 'Upload Your Photo':
     st.title('Upload Your Photo')
-    photo_uploaded = st.file_uploader('Upload your money photo here', ['png', 'jpeg', 'jpg'])
+    photo_uploaded = st.file_uploader('Please take a look at types of the file', ['png', 'jpeg', 'jpg'])
     if photo_uploaded!=None:
         image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
         img = cv2.imdecode(image_np, 1)
@@ -46,18 +57,13 @@ if choice == 'Upload Your Photo':
         #st.write(a[0])
         result = class_names[int(a)]
         st.write('The denomination is:',result)
-        # st.write('Probability:')
-        # st.write(prediction)
+        
 
-        #Check the img_array here
-        # st.write('Image array:')
-        # st.write(img_array)
-
-if choice == 'Capture From Webcam':
+elif choice == 'Capture From Webcam':
     st.title('Capture From Webcam')
     cap = cv2.VideoCapture(0)  # device 0
-    run = st.checkbox('Show Webcam')
-    capture_button = st.checkbox('Capture')
+    run = st.checkbox('Show Your Webcam')
+    capture_button = st.checkbox('Capture now!')
 
     captured_image = np.array(None)
 
@@ -94,13 +100,15 @@ if choice == 'Capture From Webcam':
         #st.write(a[0])
         result = class_names[int(a)]
         st.write('The denomination is:',result)
-        # st.write('Probability:')
-        # st.write(prediction)
+        
 
-        #Check the img_array here
-        # st.write('Image array:')
-        # st.write(img_array)
-
-        # Preprocess your prediction , How are we going to get the label name out from the prediction
-        # Now it's your turn to solve the rest of the code
+elif choice=='Ask Me ~~~':
+    st.title('Ask Me Now!')
+    st.success('Contact me at Discord Jenny Peace#2703')
+    
+    st.image('https://c.tenor.com/LwS8qVjM3rQAAAAC/dino-wonder.gif',
+    caption="I am a wonder girl who wonder about EVERYTHING",
+            use_column_width='auto')
+    
+    st.balloons()
 
