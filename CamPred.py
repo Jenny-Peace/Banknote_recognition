@@ -37,7 +37,7 @@ if choice=='Home':
 
 if choice == 'Upload Your Photo':
     st.title('Upload Your Photo')
-    photo_uploaded = st.file_uploader('Please take a look at types of the file', ['png', 'jpeg', 'jpg'])
+    photo_uploaded = st.file_uploader('Please take a look at the requirements of the file', ['png', 'jpeg', 'jpg'])
     if photo_uploaded!=None:
         image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
         img = cv2.imdecode(image_np, 1)
@@ -103,12 +103,12 @@ elif choice == 'Capture From Webcam':
         
 
 elif choice=='Ask Me ~~~':
-    st.title('Ask Me Now!')
-    st.success('Contact me at Discord Jenny Peace#2703')
+    st.title('Ask me for more help ~~!')
+    st.success('Contact me via Discord Jenny Peace#2703')
     
-    st.image('https://c.tenor.com/LwS8qVjM3rQAAAAC/dino-wonder.gif',
-    caption="I am a wonder girl who wonder about EVERYTHING",
-            use_column_width='auto')
+    # st.image('https://c.tenor.com/LwS8qVjM3rQAAAAC/dino-wonder.gif',
+    # caption="I am a wonder girl who wonder about EVERYTHING",
+    #         use_column_width='auto')
     
     st.balloons()
 
