@@ -8,7 +8,7 @@ from tensorflow import keras
 from keras.models import load_model
 #from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-menu = ['Capture From Webcam', 'Upload Your Photo']
+menu = ['Upload Your Photo','Capture From Webcam']
 
 choice = st.sidebar.selectbox('Check your money with options below:', menu)
 
@@ -22,6 +22,36 @@ model = tf.keras.models.load_model(Model_Path)
 model.compile(optimizer=tf.keras.optimizers.Adam(),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
+
+
+if choice == 'Upload Your Photo':
+    st.title('Upload Your Photo')
+    photo_uploaded = st.file_uploader('Upload your money photo here', ['png', 'jpeg', 'jpg'])
+    if photo_uploaded!=None:
+        image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
+        img = cv2.imdecode(image_np, 1)
+        st.image(img, channels='BGR')
+
+        #st.write(photo_uploaded.size)
+        #st.write(photo_uploaded.type)
+
+        #Resize the Image according with your model
+        img = cv2.resize(img,(224,224),interpolation = cv2.INTER_AREA)
+        #Expand dim to make sure your img_array is (1, Height, Width , Channel ) before plugging into the model
+        img_array  = np.expand_dims(img, axis=0)
+        
+        #JENNY code
+        prediction = model.predict(img_array)
+        a = np.argmax(prediction,axis=1)
+        #st.write(a[0])
+        result = class_names[int(a)]
+        st.write('The denomination is:',result)
+        st.write('Probability:')
+        st.write(prediction)
+
+        #Check the img_array here
+        st.write('Image array:')
+        st.write(img_array)
 
 if choice == 'Capture From Webcam':
     st.title('Capture From Webcam')
@@ -74,32 +104,3 @@ if choice == 'Capture From Webcam':
         # Preprocess your prediction , How are we going to get the label name out from the prediction
         # Now it's your turn to solve the rest of the code
 
-
-if choice == 'Upload Your Photo':
-    st.title('Upload Your Photo')
-    photo_uploaded = st.file_uploader('Upload your money photo here', ['png', 'jpeg', 'jpg'])
-    if photo_uploaded!=None:
-        image_np = np.asarray(bytearray(photo_uploaded.read()), dtype=np.uint8)
-        img = cv2.imdecode(image_np, 1)
-        st.image(img, channels='BGR')
-
-        #st.write(photo_uploaded.size)
-        #st.write(photo_uploaded.type)
-
-        #Resize the Image according with your model
-        img = cv2.resize(img,(224,224),interpolation = cv2.INTER_AREA)
-        #Expand dim to make sure your img_array is (1, Height, Width , Channel ) before plugging into the model
-        img_array  = np.expand_dims(img, axis=0)
-        
-        #JENNY code
-        prediction = model.predict(img_array)
-        a = np.argmax(prediction,axis=1)
-        #st.write(a[0])
-        result = class_names[int(a)]
-        st.write('The denomination is:',result)
-        st.write('Probability:')
-        st.write(prediction)
-
-        #Check the img_array here
-        st.write('Image array:')
-        st.write(img_array)
