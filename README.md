@@ -1,4 +1,3 @@
 # Banknote (VND) recognition
-- - Weekly project in Deep learning module at CoderSchool -
 
-This application is to classify Vietnamese banknote
+This application is to classify Vietnamese banknote with Deep learning and OpenCV
