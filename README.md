@@ -1,5 +1,4 @@
-# money_check
-my weekly project of W8
+# Banknote (VND) recognition
+- <Weekly project in Deep learning module at CoderSchool>
 
-#Nov 22: revised a little bit 
-#Nov 23: Add more tab + update model
+This application is to classify Vietnamese banknote
